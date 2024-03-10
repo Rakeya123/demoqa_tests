@@ -23,8 +23,8 @@ public class TextBox {
         File file = new File("src/test/resources/bio-photo.jpg");
         Configuration.pageLoadStrategy= "eager" ;
         open("/automation-practice-form");
-        $("#firstName").setValue("1111");
-        $("#lastName").setValue("1111");
+        $("#firstName").setValue("Anna");
+        $("#lastName").setValue("Ivanova");
         $("#userEmail").setValue("111@mai.ru");
         $(byText("Female")).click();
 
@@ -35,7 +35,7 @@ public class TextBox {
         $(".react-datepicker__month-select").selectOptionByValue(String.valueOf(3));
         $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(1985));
         $(byText("22")).click();
-        $("#subjectsInput").setValue("fefefee");
+        $("#subjectsInput").setValue("subjects");
         $(byText("Sports")).click();
        $("#uploadPicture").uploadFromClasspath("");
         $("#currentAddress").setValue("Address1");
@@ -51,11 +51,7 @@ public class TextBox {
         }
          $("#submit").click();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 }
 
