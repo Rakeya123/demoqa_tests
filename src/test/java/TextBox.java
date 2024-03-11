@@ -34,6 +34,11 @@ public class TextBox {
         $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(1985));
         $(byText("8")).click();
         $("#subjectsInput").setValue("subjects");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         $(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("");
         $("#currentAddress").setValue("Address1");
@@ -42,11 +47,7 @@ public class TextBox {
         $("#city").click();
         $("#react-select-4-option-1").click();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
         $("#submit").click();
 
         $$("tr").get(1).shouldHave(text("Anna Ivanova"));
