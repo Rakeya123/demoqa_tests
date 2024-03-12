@@ -33,7 +33,7 @@ public class TextBox {
         $(".react-datepicker__month-select").selectOptionByValue(String.valueOf(3));
         $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(1985));
         $(byText("8")).click();
-        $("#subjectsInput").setValue("subjects");
+        $("#subjectsInput").scrollTo().setValue("Maths").pressEnter();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -55,7 +55,7 @@ public class TextBox {
         $$("tr").get(3).shouldHave(text("Female"));
         $$("tr").get(4).shouldHave(text("7777777777"));
         $$("tr").get(5).shouldHave(text("08 April,1985"));
-        $$("tr").get(6).shouldHave(text("subjects"));
+        $$("tr").get(6).shouldHave(text("Maths"));
         $$("tr").get(7).shouldHave(text("Sports"));
         $$("tr").get(8).shouldHave(text("test"));
         $$("tr").get(9).shouldHave(text("Address1"));
