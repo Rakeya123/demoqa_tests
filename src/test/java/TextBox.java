@@ -33,7 +33,7 @@ public class TextBox {
         $(".react-datepicker__month-select").selectOptionByValue(String.valueOf(3));
         $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(1985));
         $(byText("8")).click();
-        $("#subjectsInput").scrollTo().setValue("Maths").pressEnter();
+        $("#subjectsInput").setValue("Maths").pressEnter();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
