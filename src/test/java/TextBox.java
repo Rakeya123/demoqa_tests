@@ -35,7 +35,8 @@ public class TextBox {
         $(".react-datepicker__month-select").selectOptionByValue(String.valueOf(3));
         $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(1985));
         $(byText("8")).click();
-        $("#subjectsInput").setValue("Maths").pressEnter();
+        $("#subjectsInput").setValue("a");
+        $(byText("Arts")).click();
         // $("#submit").scrollTo();
         $(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("bio-photo.jpg");
@@ -53,7 +54,7 @@ public class TextBox {
         $$("tr").get(3).shouldHave(text("Female"));
         $$("tr").get(4).shouldHave(text("7777777777"));
         $$("tr").get(5).shouldHave(text("08 April,1985"));
-        $$("tr").get(6).shouldHave(text("Maths"));
+        $$("tr").get(6).shouldHave(text("Arts"));
         $$("tr").get(7).shouldHave(text("Sports"));
         $$("tr").get(8).shouldHave(text("bio-photo.jpg"));
         $$("tr").get(9).shouldHave(text("Address1"));
