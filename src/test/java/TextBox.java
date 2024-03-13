@@ -34,7 +34,7 @@ public class TextBox {
         $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(1985));
         $(byText("8")).click();
         $("#subjectsInput").setValue("Maths").pressEnter();
-       // $("#submit").click();
+        $("#submit").scrollTo();
         $(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("bio-photo.jpg");
         $("#currentAddress").setValue("Address1");
