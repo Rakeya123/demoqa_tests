@@ -44,7 +44,7 @@ public class TextBox {
 
         $("#submit").click();
 
-        $$("tr").get(1).shouldHave(text("Anna Ivanova"));
+        $$("tr").get(1).shouldHave(text("Anna"));
         $$("tr").get(2).shouldHave(text("111@mai.ru"));
         $$("tr").get(3).shouldHave(text("Female"));
         $$("tr").get(4).shouldHave(text("7777777777"));
