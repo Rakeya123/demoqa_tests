@@ -21,7 +21,6 @@ public class TextBox {
 
     @Test
     void fillForTests() {
-        File file = new File("src/test/resources/bio-photo.jpg");
 
         open("/automation-practice-form");
         $("#firstName").setValue("Anna");
@@ -34,13 +33,8 @@ public class TextBox {
         $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(1985));
         $(byText("8")).click();
         $("#subjectsInput").setValue("Maths").pressEnter();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         $(byText("Sports")).click();
-        $("#uploadPicture").uploadFromClasspath("");
+        $("#uploadPicture").uploadFromClasspath("bio-photo.jpg");
         $("#currentAddress").setValue("Address1");
         $("#state").click();
         $("#react-select-3-option-1").click();
@@ -57,7 +51,7 @@ public class TextBox {
         $$("tr").get(5).shouldHave(text("08 April,1985"));
         $$("tr").get(6).shouldHave(text("Maths"));
         $$("tr").get(7).shouldHave(text("Sports"));
-        $$("tr").get(8).shouldHave(text("test"));
+        $$("tr").get(8).shouldHave(text("bio-photo.jpg"));
         $$("tr").get(9).shouldHave(text("Address1"));
         $$("tr").get(10).shouldHave(text("Uttar Pradesh Lucknow"));
     }
