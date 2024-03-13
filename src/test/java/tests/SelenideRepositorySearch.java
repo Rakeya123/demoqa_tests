@@ -32,11 +32,11 @@ open("/selenide/selenide");
         $("#wiki-tab").click();
 
        // Убедитесь, что в списке страниц (Pages) есть страница SoftAssertions
-       // $("a[href$=\"SoftAssertions\"]").shouldHave(text("Soft assertions")).shouldBe(visible);
         $$("a[class='internal present']").findBy(text("Soft assertions")).shouldBe(visible);
+
         // Откройте страницу SoftAssertions, проверьте что внутри есть пример кода для JUnit5
         $$("a[class='internal present']").findBy(text("Soft assertions")).click();
-$("#user-content-3-using-junit5-extend-test-class").parent().shouldHave(text("Using JUnit5"));
+        $("#user-content-3-using-junit5-extend-test-class").parent().shouldHave(text("Using JUnit5"));
 
 
         Configuration.holdBrowserOpen=true;
