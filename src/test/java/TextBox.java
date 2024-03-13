@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class TextBox {
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize = "1920*1080";
+        //  Configuration.browserSize = "1920*1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
 
@@ -24,6 +24,8 @@ public class TextBox {
     void fillForTests() {
 
         open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Anna");
         $("#lastName").setValue("Ivanova");
         $("#userEmail").setValue("111@mai.ru");
@@ -34,7 +36,7 @@ public class TextBox {
         $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(1985));
         $(byText("8")).click();
         $("#subjectsInput").setValue("Maths").pressEnter();
-        $("#submit").scrollTo();
+        // $("#submit").scrollTo();
         $(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("bio-photo.jpg");
         $("#currentAddress").setValue("Address1");
