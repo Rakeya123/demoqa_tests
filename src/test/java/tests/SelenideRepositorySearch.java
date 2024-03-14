@@ -21,17 +21,18 @@ public class SelenideRepositorySearch {
 
         Configuration.baseUrl = "https://github.com/"
         ;
-        }
+    }
+
     @Test
-    void shouldFindeSelenideRepositoreAtTheTop(){
+    void shouldFindeSelenideRepositoreAtTheTop() {
 
         // Откройте страницу Selenide в Github
-open("/selenide/selenide");
+        open("/selenide/selenide");
 
         // Перейдите в раздел Wiki проекта
         $("#wiki-tab").click();
 
-       // Убедитесь, что в списке страниц (Pages) есть страница SoftAssertions
+        // Убедитесь, что в списке страниц (Pages) есть страница SoftAssertions
         $$("a[class='internal present']").findBy(text("Soft assertions")).shouldBe(visible);
 
         // Откройте страницу SoftAssertions, проверьте что внутри есть пример кода для JUnit5
@@ -39,7 +40,7 @@ open("/selenide/selenide");
         $("#user-content-3-using-junit5-extend-test-class").parent().shouldHave(text("Using JUnit5"));
 
 
-        Configuration.holdBrowserOpen=true;
+        Configuration.holdBrowserOpen = true;
     }
 }
 
