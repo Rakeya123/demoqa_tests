@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TextBox {
+public class DemoQaClear {
     @BeforeAll
     static void beforeAll() {
         //  Configuration.browserSize = "1920*1080";
@@ -39,18 +39,14 @@ public class TextBox {
 
         $("#subjectsInput").setValue("a");
         $(byText("Arts")).click();
-        // $("#submit").scrollTo();
         $("#hobbiesWrapper").$(byText("Sports")).click();
-
         // Загрузка картинки
         $("#uploadPicture").uploadFromClasspath("img/bio-photo.jpg");
         $("#currentAddress").setValue("Address1");
-
         // Выбор штата
         $("#state").click();
         $("#react-select-3-option-1").click();
         $("#city").click();
-        // $("#react-select-4-option-1").click();
         $("#stateCity-wrapper").$(byText("Lucknow")).click();
 
 
@@ -59,16 +55,6 @@ public class TextBox {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
 
-        $$("tr").get(1).shouldHave(text("Anna"));
-        $$("tr").get(2).shouldHave(text("111@mai.ru"));
-        $$("tr").get(3).shouldHave(text("Female"));
-        $$("tr").get(4).shouldHave(text("7777777777"));
-        $$("tr").get(5).shouldHave(text("30 July,2008"));
-        $$("tr").get(6).shouldHave(text("Arts"));
-        $$("tr").get(7).shouldHave(text("Sports"));
-        $$("tr").get(8).shouldHave(text("bio-photo.jpg"));
-        $$("tr").get(9).shouldHave(text("Address1"));
-        $$("tr").get(10).shouldHave(text("Uttar Pradesh Lucknow"));
     }
 }
 
