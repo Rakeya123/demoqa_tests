@@ -3,15 +3,20 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pageObjects.RegistrashionPage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class DemoQaClearTest extends TextBox {
+
+public class DemoQaWishPageObjectsTest extends TextBox {
+
+    RegistrashionPage registrashionPage = new RegistrashionPage();
+
     @BeforeAll
     static void beforeAll() {
-        //  Configuration.browserSize = "1920*1080";
+        Configuration.browserSize = "1920х1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
 
@@ -21,42 +26,34 @@ public class DemoQaClearTest extends TextBox {
     @Test
     void fillForTests() {
 
-        open("/automation-practice-form");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        $("#firstName").setValue("Anna");
-        $("#lastName").setValue("Ivanova");
-        $("#userEmail").setValue("111@mai.ru");
-        $("#genterWrapper").$(byText("Female")).click();
-        $("#userNumber").setValue("7777777777");
 
-        // Календарь
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("July");
-        $(".react-datepicker__year-select").selectOption("2008");
-        $(".react-datepicker__day--030:not(.react-datepicker__day--outside-month)").click();
+        registrashionPage.openPage()
+                .setFirstName("Anna")
+                .setLastName("Ivanova")
+                .setEmail("111@mai.ru")
+                .setGender("Female")
+                .setUserNumber("7777777777")
+                .setDayOfBirth("30", "July", "2008")
+                .setSubjects("a")
+                .setHobby("Sports")
+                .upLoadPicture()
+                .setAdress("Address1")
+                .setStateUttar()
+                .setSity("Lucknow");
 
-        $("#subjectsInput").setValue("a");
-        $(byText("Arts")).click();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        // Загрузка картинки
-        $("#uploadPicture").uploadFromClasspath("img/bio-photo.jpg");
-        $("#currentAddress").setValue("Address1");
-        // Выбор штата
-        $("#state").click();
-        $("#react-select-3-option-1").click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Lucknow")).click();
+
 
 
         $("#submit").click();
         $(".modal-dialog").shouldBe(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
+        Configuration.holdBrowserOpen = true;
 
     }
+
     @Test
-    void onlyNeedForRegistration (){
+    void onlyNeedForRegistrationTest() {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -65,11 +62,6 @@ public class DemoQaClearTest extends TextBox {
         $("#userEmail").setValue("111@mai.ru");
         $("#genterWrapper").$(byText("Female")).click();
         $("#userNumber").setValue("7777777777");
-
-
-
-
-
 
 
         $("#submit").click();
@@ -80,7 +72,7 @@ public class DemoQaClearTest extends TextBox {
     }
 
     @Test
-    void negativeRegistration(){
+    void negativeRegistrationTest() {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -96,6 +88,4 @@ public class DemoQaClearTest extends TextBox {
 
     }
 }
-
-
 
