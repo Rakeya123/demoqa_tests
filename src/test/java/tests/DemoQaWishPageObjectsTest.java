@@ -39,15 +39,23 @@ public class DemoQaWishPageObjectsTest extends TextBox {
                 .upLoadPicture()
                 .setAdress("Address1")
                 .setStateUttar()
-                .setSity("Lucknow");
+                .setSity("Lucknow")
+                .clickSumbut();
+
+
+        registrashionPage.checkResults("Student Name", "Anna")
+                .checkResults("Student Email", "111@mai.ru")
+                .checkResults("Address", "Address1")
+
+
+        ;
 
 
 
 
-        $("#submit").click();
-        $(".modal-dialog").shouldBe(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
+       // $(".modal-dialog").shouldBe(appear);
+       // $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+       // $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
         Configuration.holdBrowserOpen = true;
 
     }

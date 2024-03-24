@@ -4,6 +4,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import pageObjects.components.CalendarComponents;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -20,7 +21,8 @@ public class RegistrashionPage {
             pictureInput = $("#uploadPicture"),
             adressInput = $("#currentAddress"),
             stateUttarInput = $("#react-select-3-option-1"),
-            cityInput = $("#stateCity-wrapper");
+            cityInput = $("#stateCity-wrapper"),
+    sumbitInput = $("#submit");
 
     CalendarComponents calendarComponents = new CalendarComponents();
 
@@ -94,6 +96,15 @@ public class RegistrashionPage {
 
         $("#city").click();
         cityInput.$(byText(value)).click();
+        return this;
+    }
+    public RegistrashionPage clickSumbut () {
+        sumbitInput.click();
+        return this;
+    }
+
+    public RegistrashionPage checkResults (String key,String value) {
+$(".table-responsive").$(byText(key)).parent().shouldHave(text(value));
         return this;
     }
 }
