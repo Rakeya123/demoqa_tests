@@ -52,7 +52,7 @@ public class DemoQaClearTest extends TextBox {
         $("#submit").click();
         $(".modal-dialog").shouldBe(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
+        $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text(" "), text("Female"));
 
     }
     @Test
@@ -62,14 +62,8 @@ public class DemoQaClearTest extends TextBox {
         executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Anna");
         $("#lastName").setValue("Ivanova");
-        $("#userEmail").setValue("111@mai.ru");
         $("#genterWrapper").$(byText("Female")).click();
         $("#userNumber").setValue("7777777777");
-
-
-
-
-
 
 
         $("#submit").click();
@@ -80,11 +74,10 @@ public class DemoQaClearTest extends TextBox {
     }
 
     @Test
-    void negativeRegistration(){
+    void registrationWithoutFirstName(){
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
-        //$("#firstName").setValue("Anna");
         $("#lastName").setValue("Ivanova");
         $("#userEmail").setValue("111@mai.ru");
         $("#genterWrapper").$(byText("Female")).click();
@@ -93,6 +86,8 @@ public class DemoQaClearTest extends TextBox {
         $("#submit").click();
         $(".modal-dialog").shouldNot(appear);
         $("#example-modal-sizes-title-lg").shouldNotBe(visible);
+        $("#firstName").shouldHave((cssValue("border-color", "rgb(220, 53, 69)")));
+        $("#firstName").shouldBe((empty));
 
     }
 }

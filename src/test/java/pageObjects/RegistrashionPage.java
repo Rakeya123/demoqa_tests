@@ -3,8 +3,9 @@ package pageObjects;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import pageObjects.components.CalendarComponents;
+import pageObjects.components.TitleChek;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -25,7 +26,7 @@ public class RegistrashionPage {
     sumbitInput = $("#submit");
 
     CalendarComponents calendarComponents = new CalendarComponents();
-
+TitleChek titleChek = new TitleChek();
 
     public RegistrashionPage openPage() {
         open("/automation-practice-form");
@@ -105,6 +106,24 @@ public class RegistrashionPage {
 
     public RegistrashionPage checkResults (String key,String value) {
 $(".table-responsive").$(byText(key)).parent().shouldHave(text(value));
+        return this;
+    }
+
+    public RegistrashionPage titleExist () {
+        titleChek.titleApper();
+
+        return this;
+    }
+    public RegistrashionPage titleNotExist () {
+        titleChek.titleDisApper();
+
+        return this;
+    }
+
+    public RegistrashionPage firstNameEmpty () {
+        firstNameInput.shouldHave((cssValue("border-color", "rgb(220, 53, 69)")));
+       firstNameInput.shouldBe((empty));
+
         return this;
     }
 }

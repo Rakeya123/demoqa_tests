@@ -26,14 +26,13 @@ public class DemoQaWishPageObjectsTest extends TextBox {
     @Test
     void fillForTests() {
 
-
         registrashionPage.openPage()
                 .setFirstName("Anna")
                 .setLastName("Ivanova")
                 .setEmail("111@mai.ru")
                 .setGender("Female")
                 .setUserNumber("7777777777")
-                .setDayOfBirth("30", "July", "2008")
+                .setDayOfBirth("12", "July", "2002")
                 .setSubjects("a")
                 .setHobby("Sports")
                 .upLoadPicture()
@@ -42,57 +41,46 @@ public class DemoQaWishPageObjectsTest extends TextBox {
                 .setSity("Lucknow")
                 .clickSumbut();
 
-
+registrashionPage.titleExist();
         registrashionPage.checkResults("Student Name", "Anna")
                 .checkResults("Student Email", "111@mai.ru")
                 .checkResults("Address", "Address1")
+                .checkResults("State and City", "Uttar Pradesh Lucknow") ;
 
 
-        ;
-
-
-
-
-       // $(".modal-dialog").shouldBe(appear);
-       // $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-       // $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
-        Configuration.holdBrowserOpen = true;
 
     }
 
     @Test
     void onlyNeedForRegistrationTest() {
-        open("/automation-practice-form");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        $("#firstName").setValue("Anna");
-        $("#lastName").setValue("Ivanova");
-        $("#userEmail").setValue("111@mai.ru");
-        $("#genterWrapper").$(byText("Female")).click();
-        $("#userNumber").setValue("7777777777");
+        registrashionPage.openPage()
+                .setFirstName("Anna")
+                .setLastName("Ivanova")
+                .setGender("Female")
+                .setUserNumber("7777777777")
+                .clickSumbut();
+
+        registrashionPage.titleExist();
+        registrashionPage.checkResults("Student Name", "Anna")
+                .checkResults("Student Email", " ")
+                .checkResults("Address", " ")
+                .checkResults("State and City", " ") ;
 
 
-        $("#submit").click();
-        $(".modal-dialog").shouldBe(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
+        Configuration.holdBrowserOpen = true;
 
     }
 
     @Test
-    void negativeRegistrationTest() {
-        open("/automation-practice-form");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        //$("#firstName").setValue("Anna");
-        $("#lastName").setValue("Ivanova");
-        $("#userEmail").setValue("111@mai.ru");
-        $("#genterWrapper").$(byText("Female")).click();
-        $("#userNumber").setValue("7777777777");
+    void registrationWithoutFirstName() {
+        registrashionPage.openPage()
+                .setLastName("Ivanova")
+                .setGender("Female")
+                .setUserNumber("7777777777")
+                .clickSumbut();
+        registrashionPage.titleNotExist();
 
-        $("#submit").click();
-        $(".modal-dialog").shouldNot(appear);
-        $("#example-modal-sizes-title-lg").shouldNotBe(visible);
+       registrashionPage.firstNameEmpty();
 
     }
 }
