@@ -5,12 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pageObjects.RegistrashionPage;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 
-
-public class DemoQaWishPageObjectsTest extends TextBox {
+public class DemoQaWishPageObjectsTest {
 
     RegistrashionPage registrashionPage = new RegistrashionPage();
 
@@ -24,7 +20,7 @@ public class DemoQaWishPageObjectsTest extends TextBox {
     }
 
     @Test
-    void fillForTests() {
+    void fullForTests() {
 
         registrashionPage.openPage()
                 .setFirstName("Anna")
@@ -41,12 +37,11 @@ public class DemoQaWishPageObjectsTest extends TextBox {
                 .setSity("Lucknow")
                 .clickSumbut();
 
-registrashionPage.titleExist();
+        registrashionPage.titleExist();
         registrashionPage.checkResults("Student Name", "Anna")
                 .checkResults("Student Email", "111@mai.ru")
                 .checkResults("Address", "Address1")
-                .checkResults("State and City", "Uttar Pradesh Lucknow") ;
-
+                .checkResults("State and City", "Uttar Pradesh Lucknow");
 
 
     }
@@ -64,7 +59,7 @@ registrashionPage.titleExist();
         registrashionPage.checkResults("Student Name", "Anna")
                 .checkResults("Student Email", " ")
                 .checkResults("Address", " ")
-                .checkResults("State and City", " ") ;
+                .checkResults("State and City", " ");
 
 
         Configuration.holdBrowserOpen = true;
@@ -80,7 +75,7 @@ registrashionPage.titleExist();
                 .clickSumbut();
         registrashionPage.titleNotExist();
 
-       registrashionPage.firstNameEmpty();
+        registrashionPage.firstNameEmpty();
 
     }
 }

@@ -8,10 +8,10 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class DemoQaClearTest extends TextBox {
+public class DemoQaClearTest {
     @BeforeAll
     static void beforeAll() {
-        //  Configuration.browserSize = "1920*1080";
+        Configuration.browserSize = "1920Х1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
 
@@ -19,7 +19,7 @@ public class DemoQaClearTest extends TextBox {
     }
 
     @Test
-    void fillForTests() {
+    void fullForTests() {
 
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
