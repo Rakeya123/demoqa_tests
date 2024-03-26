@@ -1,17 +1,16 @@
-package pageObjects;
+package pageobjects;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import pageObjects.components.CalendarComponents;
-import pageObjects.components.TitleChek;
+import pageobjects.components.CalendarComponents;
+import pageobjects.components.TitleCheсk;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
-public class RegistrashionPage {
-    private SelenideElement firstNameInput = $("#firstName"),
+public class RegistrationPage {
+    private final SelenideElement firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             emailInput = $("#userEmail"),
             userNumberInput = $("#userNumber"),
@@ -23,106 +22,113 @@ public class RegistrashionPage {
             adressInput = $("#currentAddress"),
             stateUttarInput = $("#react-select-3-option-1"),
             cityInput = $("#stateCity-wrapper"),
-    sumbitInput = $("#submit");
+            stateClick = $("#state"),
+            cityClick = $("#city"),
+            tableCheck = $(".table-responsive"),
+            submitInput = $("#submit");
 
     CalendarComponents calendarComponents = new CalendarComponents();
-TitleChek titleChek = new TitleChek();
+    TitleCheсk titleCheсk = new TitleCheсk();
 
-    public RegistrashionPage openPage() {
+    public RegistrationPage openPage() {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
     }
 
-    public RegistrashionPage setFirstName(String value) {
+    public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
 
     }
 
-    public RegistrashionPage setLastName(String value) {
+    public RegistrationPage setLastName(String value) {
         lastNameInput.setValue(value);
         return this;
     }
 
-    public RegistrashionPage setEmail(String value) {
+    public RegistrationPage setEmail(String value) {
         emailInput.setValue(value);
         return this;
     }
 
-    public RegistrashionPage setUserNumber(String value) {
+    public RegistrationPage setUserNumber(String value) {
         userNumberInput.setValue(value);
         return this;
     }
 
-    public RegistrashionPage setGender(String value) {
+    public RegistrationPage setGender(String value) {
         genderInput.$(byText(value)).click();
         return this;
     }
 
-    public RegistrashionPage setDayOfBirth(String day, String month, String year) {
+    public RegistrationPage setDayOfBirth(String day, String month, String year) {
         calendarInput.click();
         calendarComponents.setDate(day, month, year);
 
         return this;
     }
 
-    public RegistrashionPage setSubjects(String value) {
+    public RegistrationPage setSubjects(String value) {
         subjectsInput.setValue(value);
         $(byText("Arts")).click();
         return this;
     }
 
-    public RegistrashionPage setHobby(String value) {
+    public RegistrationPage setHobby(String value) {
         hobbiesInput.$(byText(value)).click();
         return this;
     }
 
-    public RegistrashionPage upLoadPicture() {
+    public RegistrationPage upLoadPicture() {
         pictureInput.uploadFromClasspath("img/bio-photo.jpg");
         return this;
     }
-    public RegistrashionPage setAdress (String value) {
+
+    public RegistrationPage setAdress(String value) {
         adressInput.setValue(value);
         return this;
     }
 
-    public RegistrashionPage setStateUttar () {
-        $("#state").click();
+    public RegistrationPage setStateUttar() {
+        stateClick.click();
         stateUttarInput.click();
         return this;
     }
-    public RegistrashionPage setSity (String value) {
 
-        $("#city").click();
+    public RegistrationPage setСity(String value) {
+
+        cityClick.click();
         cityInput.$(byText(value)).click();
         return this;
     }
-    public RegistrashionPage clickSumbut () {
-        sumbitInput.click();
+
+    public RegistrationPage clickSubmit() {
+        submitInput.click();
         return this;
     }
 
-    public RegistrashionPage checkResults (String key,String value) {
-$(".table-responsive").$(byText(key)).parent().shouldHave(text(value));
+    public RegistrationPage checkResults(String key, String value) {
+        tableCheck.$(byText(key)).parent().shouldHave(text(value));
         return this;
     }
 
-    public RegistrashionPage titleExist () {
-        titleChek.titleApper();
-
-        return this;
-    }
-    public RegistrashionPage titleNotExist () {
-        titleChek.titleDisApper();
+    public RegistrationPage titleExist() {
+        titleCheсk.titleAppear();
 
         return this;
     }
 
-    public RegistrashionPage firstNameEmpty () {
+    public RegistrationPage titleNotExist() {
+        titleCheсk.titleDisAppear();
+
+        return this;
+    }
+
+    public RegistrationPage firstNameEmpty() {
         firstNameInput.shouldHave((cssValue("border-color", "rgb(220, 53, 69)")));
-       firstNameInput.shouldBe((empty));
+        firstNameInput.shouldBe((empty));
 
         return this;
     }

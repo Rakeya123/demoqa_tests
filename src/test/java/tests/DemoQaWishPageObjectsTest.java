@@ -1,28 +1,20 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import pageObjects.RegistrashionPage;
+import pageobjects.RegistrationPage;
+import pageobjects.components.TestBase;
 
 
-public class DemoQaWishPageObjectsTest {
+public class DemoQaWishPageObjectsTest  extends TestBase {
 
-    RegistrashionPage registrashionPage = new RegistrashionPage();
+    RegistrationPage registrationPage = new RegistrationPage();
 
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1920х1080";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-
-
-    }
 
     @Test
     void fullForTests() {
 
-        registrashionPage.openPage()
+        registrationPage.openPage()
                 .setFirstName("Anna")
                 .setLastName("Ivanova")
                 .setEmail("111@mai.ru")
@@ -34,11 +26,11 @@ public class DemoQaWishPageObjectsTest {
                 .upLoadPicture()
                 .setAdress("Address1")
                 .setStateUttar()
-                .setSity("Lucknow")
-                .clickSumbut();
+                .setСity("Lucknow")
+                .clickSubmit();
 
-        registrashionPage.titleExist();
-        registrashionPage.checkResults("Student Name", "Anna")
+        registrationPage.titleExist();
+        registrationPage.checkResults("Student Name", "Anna")
                 .checkResults("Student Email", "111@mai.ru")
                 .checkResults("Address", "Address1")
                 .checkResults("State and City", "Uttar Pradesh Lucknow");
@@ -48,34 +40,32 @@ public class DemoQaWishPageObjectsTest {
 
     @Test
     void onlyNeedForRegistrationTest() {
-        registrashionPage.openPage()
+        registrationPage.openPage()
                 .setFirstName("Anna")
                 .setLastName("Ivanova")
                 .setGender("Female")
                 .setUserNumber("7777777777")
-                .clickSumbut();
+                .clickSubmit();
 
-        registrashionPage.titleExist();
-        registrashionPage.checkResults("Student Name", "Anna")
+        registrationPage.titleExist();
+        registrationPage.checkResults("Student Name", "Anna")
                 .checkResults("Student Email", " ")
                 .checkResults("Address", " ")
                 .checkResults("State and City", " ");
 
 
-        Configuration.holdBrowserOpen = true;
-
     }
 
     @Test
     void registrationWithoutFirstName() {
-        registrashionPage.openPage()
+        registrationPage.openPage()
                 .setLastName("Ivanova")
                 .setGender("Female")
                 .setUserNumber("7777777777")
-                .clickSumbut();
-        registrashionPage.titleNotExist();
+                .clickSubmit();
+        registrationPage.titleNotExist();
 
-        registrashionPage.firstNameEmpty();
+        registrationPage.firstNameEmpty();
 
     }
 }

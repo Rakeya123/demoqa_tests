@@ -1,16 +1,16 @@
-package pageObjects.components;
+package pageobjects.components;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-public class TitleChek {
-    public void titleApper() {
+public class TitleCheсk {
+    public void titleAppear() {
 
         $(".modal-dialog").shouldBe(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
     }
 
-    public void titleDisApper() {
+    public void titleDisAppear() {
 
         $(".modal-dialog").shouldNot(appear);
         $("#example-modal-sizes-title-lg").shouldNotBe(visible);
