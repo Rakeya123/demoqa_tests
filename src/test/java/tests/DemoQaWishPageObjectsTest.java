@@ -1,9 +1,7 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 import pageobjects.RegistrationPage;
-import pageobjects.components.TestBase;
 
 
 public class DemoQaWishPageObjectsTest  extends TestBase {

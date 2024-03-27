@@ -2,7 +2,7 @@ package pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import pageobjects.components.CalendarComponents;
-import pageobjects.components.TitleCheсk;
+import pageobjects.components.TitleCheck;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -28,7 +28,7 @@ public class RegistrationPage {
             submitInput = $("#submit");
 
     CalendarComponents calendarComponents = new CalendarComponents();
-    TitleCheсk titleCheсk = new TitleCheсk();
+    TitleCheck titleCheck = new TitleCheck();
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -115,13 +115,13 @@ public class RegistrationPage {
     }
 
     public RegistrationPage titleExist() {
-        titleCheсk.titleAppear();
+        titleCheck.titleAppear();
 
         return this;
     }
 
     public RegistrationPage titleNotExist() {
-        titleCheсk.titleDisAppear();
+        titleCheck.titleDisAppear();
 
         return this;
     }
