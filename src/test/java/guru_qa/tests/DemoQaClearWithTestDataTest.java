@@ -1,22 +1,28 @@
-package tests;
+package guru_qa.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static guru_qa.tests.TestData.*;
 
-public class DemoQaClearTest {
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1920Х1080";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
+public class DemoQaClearWithTestDataTest extends TestBase {
 
+//  static   String firstName,
+//            lastName,
+//            userEmail;
+//
+//
+//    @BeforeEach
+//    void prepareTestData()
 
-    }
+//    {
+//        firstName = "Anna";
+//        lastName = "Ivanona";
+//        userEmail = "pomidor@mai.ru";
+//    }
+
 
     @Test
     void fullForTests() {
@@ -24,9 +30,9 @@ public class DemoQaClearTest {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
-        $("#firstName").setValue("Anna");
-        $("#lastName").setValue("Ivanova");
-        $("#userEmail").setValue("111@mai.ru");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Female")).click();
         $("#userNumber").setValue("7777777777");
 
@@ -52,7 +58,7 @@ public class DemoQaClearTest {
         $("#submit").click();
         $(".modal-dialog").shouldBe(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text(" "), text("Female"));
+        $(".table-responsive").shouldHave(text(firstName), text(firstName), text(" "), text("Female"));
 
     }
     @Test
@@ -60,8 +66,8 @@ public class DemoQaClearTest {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
-        $("#firstName").setValue("Anna");
-        $("#lastName").setValue("Ivanova");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
         $("#genterWrapper").$(byText("Female")).click();
         $("#userNumber").setValue("7777777777");
 
@@ -69,7 +75,7 @@ public class DemoQaClearTest {
         $("#submit").click();
         $(".modal-dialog").shouldBe(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
+        $(".table-responsive").shouldHave(text(firstName), text(firstName), text(userEmail), text("Female"));
 
     }
 
@@ -78,8 +84,8 @@ public class DemoQaClearTest {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
-        $("#lastName").setValue("Ivanova");
-        $("#userEmail").setValue("111@mai.ru");
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Female")).click();
         $("#userNumber").setValue("7777777777");
 

@@ -1,8 +1,8 @@
-package pageobjects;
+package guru_qa.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
-import pageobjects.components.CalendarComponents;
-import pageobjects.components.TitleCheсk;
+import guru_qa.pageobjects.components.CalendarComponents;
+import guru_qa.pageobjects.components.TitleCheck;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -20,7 +20,7 @@ public class RegistrationPage {
             hobbiesInput = $("#hobbiesWrapper"),
             pictureInput = $("#uploadPicture"),
             adressInput = $("#currentAddress"),
-            stateUttarInput = $("#react-select-3-option-1"),
+
             cityInput = $("#stateCity-wrapper"),
             stateClick = $("#state"),
             cityClick = $("#city"),
@@ -28,7 +28,7 @@ public class RegistrationPage {
             submitInput = $("#submit");
 
     CalendarComponents calendarComponents = new CalendarComponents();
-    TitleCheсk titleCheсk = new TitleCheсk();
+    TitleCheck titleCheck = new TitleCheck();
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -71,8 +71,8 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setSubjects(String value) {
-        subjectsInput.setValue(value);
-        $(byText("Arts")).click();
+        subjectsInput.setValue(value.toLowerCase());
+        $(byText(value)).click();
         return this;
     }
 
@@ -91,9 +91,10 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setStateUttar() {
+    public RegistrationPage setState(String value) {
         stateClick.click();
-        stateUttarInput.click();
+        $(byText(value)).click();
+
         return this;
     }
 
@@ -115,13 +116,13 @@ public class RegistrationPage {
     }
 
     public RegistrationPage titleExist() {
-        titleCheсk.titleAppear();
+        titleCheck.titleAppear();
 
         return this;
     }
 
     public RegistrationPage titleNotExist() {
-        titleCheсk.titleDisAppear();
+        titleCheck.titleDisAppear();
 
         return this;
     }
