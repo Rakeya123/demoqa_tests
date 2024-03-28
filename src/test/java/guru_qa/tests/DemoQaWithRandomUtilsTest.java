@@ -1,27 +1,25 @@
-package tests;
+package guru_qa.tests;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static tests.TestData.*;
+import static guru_qa.tests.TestData.*;
+import static guru_qa.utils.RandomUtils.*;
 
-public class DemoQaWithFakerTest extends TestBase {
+public class DemoQaWithRandomUtilsTest extends TestBase {
 
 
 
     @Test
     void fullForTests() {
-        Faker faker = new Faker();
 
 
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String userEmail = faker.internet().emailAddress();
-
-        String streetAddress = faker.address().streetAddress();
+        String firstName = getRandomString(10);
+       String lastName = getRandomString(10);
+       String userEmail = getRandomEmail();
+       String streetAddress = getRandomAdress();
 
 
         open("/automation-practice-form");

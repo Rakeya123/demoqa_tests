@@ -1,27 +1,31 @@
-package tests;
+package guru_qa.tests;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static tests.TestData.*;
-import static utils.RandomUtils.*;
+import static guru_qa.tests.TestData.*;
 
-public class DemoQaWithRandomUtilsTest extends TestBase {
+public class DemoQaClearWithTestDataTest extends TestBase {
 
+//  static   String firstName,
+//            lastName,
+//            userEmail;
+//
+//
+//    @BeforeEach
+//    void prepareTestData()
+
+//    {
+//        firstName = "Anna";
+//        lastName = "Ivanona";
+//        userEmail = "pomidor@mai.ru";
+//    }
 
 
     @Test
     void fullForTests() {
-
-
-        String firstName = getRandomString(10);
-       String lastName = getRandomString(10);
-       String userEmail = getRandomEmail();
-       String streetAddress = getRandomAdress();
-
 
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
@@ -43,7 +47,7 @@ public class DemoQaWithRandomUtilsTest extends TestBase {
         $("#hobbiesWrapper").$(byText("Sports")).click();
         // Загрузка картинки
         $("#uploadPicture").uploadFromClasspath("img/bio-photo.jpg");
-        $("#currentAddress").setValue(streetAddress);
+        $("#currentAddress").setValue("Address1");
         // Выбор штата
         $("#state").click();
         $("#react-select-3-option-1").click();

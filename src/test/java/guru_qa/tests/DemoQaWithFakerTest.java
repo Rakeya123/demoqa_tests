@@ -1,32 +1,28 @@
-package tests;
+package guru_qa.tests;
 
-import org.junit.jupiter.api.BeforeEach;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static tests.TestData.*;
+import static guru_qa.tests.TestData.*;
 
-public class DemoQaClearWithTestDataTest extends TestBase {
+public class DemoQaWithFakerTest extends TestBase {
 
-//  static   String firstName,
-//            lastName,
-//            userEmail;
-//
-//
-//    @BeforeEach
-//    void prepareTestData()
-
-//    {
-//        firstName = "Anna";
-//        lastName = "Ivanona";
-//        userEmail = "pomidor@mai.ru";
-//    }
 
 
     @Test
     void fullForTests() {
+        Faker faker = new Faker();
+
+
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
+
+        String streetAddress = faker.address().streetAddress();
+
 
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
@@ -48,7 +44,7 @@ public class DemoQaClearWithTestDataTest extends TestBase {
         $("#hobbiesWrapper").$(byText("Sports")).click();
         // Загрузка картинки
         $("#uploadPicture").uploadFromClasspath("img/bio-photo.jpg");
-        $("#currentAddress").setValue("Address1");
+        $("#currentAddress").setValue(streetAddress);
         // Выбор штата
         $("#state").click();
         $("#react-select-3-option-1").click();

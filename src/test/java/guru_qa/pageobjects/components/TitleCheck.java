@@ -1,4 +1,4 @@
-package pageobjects.components;
+package guru_qa.pageobjects.components;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
