@@ -98,6 +98,14 @@ public class RandomUtils {
            return state3Values[valueIndex];
        }
     }
+    public static String choiceDayOfBirth (){
+        String dayOfBirth = String.valueOf(getRandomInt(1,28));
+        if (dayOfBirth.length()<2){
+            dayOfBirth = "0"+dayOfBirth;
+        }
+
+        return dayOfBirth;
+    }
 
 
 }

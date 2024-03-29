@@ -25,7 +25,7 @@ public class DemoQaWishPageObjectsTest extends TestBase {
         String userNumber = String.valueOf(getRandomLong(1000000000l, 9999999999l));
         String hobby = choiceRandomHobby();
         String subject = choiceSubject();
-        String day = String.valueOf(getRandomInt(10, 28));
+        String day = choiceDayOfBirth();
         String year = String.valueOf(getRandomInt(1980, 2021));
         String month = choiceMonth();
 int stateIndex = getRandomInt(0,states.length-1);
