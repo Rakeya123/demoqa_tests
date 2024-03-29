@@ -35,7 +35,6 @@ public class DemoQaWishFakerAndPageObjectsTest extends TestBase {
         String subject = choiceSubject();
         String day = dayFormatter.format(birthday); // format: 2 digits, example - "01"
         String month = monthFormatter.format(birthday);
-        System.out.println(month + "!!!!!!!!!!!!!!");
         String year = yearFormatter.format(birthday);
         int stateIndex = getRandomInt(0, states.length - 1);
 
