@@ -14,7 +14,7 @@ public class DemoQaWishPageObjectsTest extends TestBase {
 
     @Test
     void fullForTests() {
-        Faker faker = new Faker();
+        Faker faker = Faker.instance();
 
 
         String firstName = faker.name().firstName();

@@ -18,7 +18,7 @@ public class DemoQaWishFakerAndPageObjectsTest extends TestBase {
 
     @Test
     void fullForTests() {
-        Faker faker = new Faker(Locale.US);
+        Faker faker = Faker.instance(Locale.US);
         Date birthday = faker.date().birthday();
         SimpleDateFormat yearFormatter = new SimpleDateFormat("yyyy");
         SimpleDateFormat monthFormatter = new SimpleDateFormat("MMMM", Locale.US) ;
