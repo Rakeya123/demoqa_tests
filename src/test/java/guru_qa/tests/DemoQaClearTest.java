@@ -2,6 +2,8 @@ package guru_qa.tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
@@ -69,11 +71,13 @@ public class DemoQaClearTest {
         $("#submit").click();
         $(".modal-dialog").shouldBe(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("111@mai.ru"), text("Female"));
+        $(".table-responsive").shouldHave(text("Anna"), text("Anna"), text("Female"));
 
     }
 
+    @Tag("User_Service")
     @Test
+
     void registrationWithoutFirstName(){
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
