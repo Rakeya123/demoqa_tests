@@ -1,5 +1,6 @@
 package guru_qa.tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
@@ -79,6 +80,7 @@ public class DemoQaClearWithTestDataTest extends TestBase {
 
     }
 
+    @Tag("User_Service")
     @Test
     void registrationWithoutFirstName(){
         open("/automation-practice-form");
