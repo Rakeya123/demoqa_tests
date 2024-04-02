@@ -1,24 +1,28 @@
 package guru_qa.tests;
 
 import com.github.javafaker.Faker;
-import guru_qa.utils.RandomUtils;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
 import guru_qa.pageobjects.RegistrationPage;
+import guru_qa.utils.RandomUtils;
+import org.junit.jupiter.api.Test;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import static guru_qa.utils.RandomUtils.*;
 
-public class DemoQaWishPageObjectsTest extends TestBase {
+public class DemoQaWishFakerAndPageObjectsTest extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
 
 
-
     @Test
-    @Tag("smoke")
     void fullForTests() {
-        Faker faker = Faker.instance();
+        Faker faker = Faker.instance(Locale.US);
+        Date birthday = faker.date().birthday();
+        SimpleDateFormat yearFormatter = new SimpleDateFormat("yyyy");
+        SimpleDateFormat monthFormatter = new SimpleDateFormat("MMMM", Locale.US) ;
+        SimpleDateFormat dayFormatter= new SimpleDateFormat("dd");
 
 
         String firstName = faker.name().firstName();
@@ -29,9 +33,9 @@ public class DemoQaWishPageObjectsTest extends TestBase {
         String userNumber = String.valueOf(getRandomLong(1000000000L, 9999999999L));
         String hobby = choiceRandomHobby();
         String subject = choiceSubject();
-        String day = choiceDayOfBirth();
-        String year = String.valueOf(getRandomInt(1980, 2021));
-        String month = choiceMonth();
+        String day = dayFormatter.format(birthday); // format: 2 digits, example - "01"
+        String month = monthFormatter.format(birthday);
+        String year = yearFormatter.format(birthday);
         int stateIndex = getRandomInt(0, states.length - 1);
 
         registrationPage.openPage()
