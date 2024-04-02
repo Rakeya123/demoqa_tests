@@ -2,6 +2,8 @@ package guru_qa.tests;
 
 import com.github.javafaker.Faker;
 import guru_qa.utils.RandomUtils;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import guru_qa.pageobjects.RegistrationPage;
 
@@ -12,7 +14,9 @@ public class DemoQaWishPageObjectsTest extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
 
+
     @Test
+    @Tag("smoke")
     void fullForTests() {
         Faker faker = Faker.instance();
 
