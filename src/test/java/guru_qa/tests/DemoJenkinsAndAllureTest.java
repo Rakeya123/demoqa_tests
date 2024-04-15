@@ -1,8 +1,11 @@
 package guru_qa.tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
 import guru_qa.pageobjects.RegistrationPage;
 import guru_qa.utils.RandomUtils;
+import io.qameta.allure.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +13,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.codeborne.selenide.Selenide.open;
 import static guru_qa.utils.RandomUtils.*;
+import static io.qameta.allure.Allure.step;
+
+
 @Tag("simple")
 public class DemoJenkinsAndAllureTest extends TestBase {
 
@@ -18,6 +25,11 @@ public class DemoJenkinsAndAllureTest extends TestBase {
 
 
     @Test
+    @Feature("Issue в репозитории")
+    @Story("Поиск Issue")
+    @Owner("rakeya")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Регистрация в форме")
     void fullForTests() {
         Faker faker = Faker.instance(Locale.US);
         Date birthday = faker.date().birthday();
@@ -39,27 +51,40 @@ public class DemoJenkinsAndAllureTest extends TestBase {
         String year = yearFormatter.format(birthday);
         int stateIndex = getRandomInt(0, states.length - 1);
 
-        registrationPage.openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setGender(gender)
-                .setUserNumber(userNumber)
-                .setDayOfBirth(day, month, year)
-                .setSubjects(subject)
-                .setHobby(hobby)
-                .upLoadPicture()
-                .setAdress(streetAddress)
-                .setState(RandomUtils.choiceState(stateIndex))
-                .setСity(RandomUtils.getSateValue(stateIndex))
-                .clickSubmit();
 
-        registrationPage.titleExist();
-        registrationPage.checkResults("Student Name", firstName)
-                .checkResults("Student Email", userEmail)
-                .checkResults("Address", streetAddress)
-                .checkResults("Subjects", subject)
-                .checkResults("State and City", choiceState(stateIndex));
+
+        step("Заполянем форму", () -> {
+            registrationPage.openPage()
+                    .setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setEmail(userEmail)
+                    .setGender(gender)
+                    .setUserNumber(userNumber)
+                    .setDayOfBirth(day, month, year)
+                    .setSubjects(subject)
+                    .setHobby(hobby)
+                    .upLoadPicture()
+                    .setAdress(streetAddress)
+                    .setState(RandomUtils.choiceState(stateIndex))
+                    .setСity(RandomUtils.getSateValue(stateIndex))
+                    .clickSubmit();
+
+        });
+
+
+
+
+        step("Проверяем", () -> {
+            registrationPage.titleExist();
+            registrationPage.checkResults("Student Name", firstName)
+                    .checkResults("Student Email", userEmail)
+                    .checkResults("Address", streetAddress)
+                    .checkResults("Subjects", subject)
+                    .checkResults("State and City", choiceState(stateIndex));
+
+
+        });
+
 
     }
 
