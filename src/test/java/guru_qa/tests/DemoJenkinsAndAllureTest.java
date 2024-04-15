@@ -30,7 +30,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
 
 
     @BeforeAll
-    static void beforeAll() {
+    static void setup() {
 
 
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
