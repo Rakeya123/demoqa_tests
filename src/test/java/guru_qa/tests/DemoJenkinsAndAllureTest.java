@@ -1,18 +1,23 @@
 package guru_qa.tests;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.LogEvent;
+import com.codeborne.selenide.logevents.LogEventListener;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
 import guru_qa.pageobjects.RegistrationPage;
+import guru_qa.utils.Attach;
 import guru_qa.utils.RandomUtils;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static guru_qa.utils.RandomUtils.*;
 import static io.qameta.allure.Allure.step;
@@ -24,18 +29,54 @@ public class DemoJenkinsAndAllureTest extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
 
+    @BeforeAll
+    static void beforeAll() {
+
+
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+
+        Configuration.browserCapabilities = capabilities;
+        SelenideLogger.addListener("AllureSelenide", new LogEventListener() {
+            @Override
+            public void afterEvent(LogEvent logEvent) {
+                System.out.println("After: "+logEvent);
+            }
+
+            @Override
+            public void beforeEvent(LogEvent logEvent) {
+                System.out.println("Before: "+logEvent);
+
+            }
+        });
+    }
+
+    @AfterEach
+    void afterEach() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+        closeWebDriver();
+    }
+
     @Test
     @Feature("Issue в репозитории")
     @Story("Поиск Issue")
     @Owner("rakeya")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Регистрация в форме")
+    @DisplayName("Регистрация всех данных форме")
     void fullForTests() {
         Faker faker = Faker.instance(Locale.US);
         Date birthday = faker.date().birthday();
         SimpleDateFormat yearFormatter = new SimpleDateFormat("yyyy");
-        SimpleDateFormat monthFormatter = new SimpleDateFormat("MMMM", Locale.US) ;
-        SimpleDateFormat dayFormatter= new SimpleDateFormat("dd");
+        SimpleDateFormat monthFormatter = new SimpleDateFormat("MMMM", Locale.US);
+        SimpleDateFormat dayFormatter = new SimpleDateFormat("dd");
 
 
         String firstName = faker.name().firstName();
@@ -51,11 +92,13 @@ public class DemoJenkinsAndAllureTest extends TestBase {
         String year = yearFormatter.format(birthday);
         int stateIndex = getRandomInt(0, states.length - 1);
 
+        step("Открыть страницу регистации", () -> {
+            registrationPage.openPage();
 
+        });
 
-        step("Заполянем форму", () -> {
-            registrationPage.openPage()
-                    .setFirstName(firstName)
+        step("Заполнить форму регистации ", () -> {
+            registrationPage.setFirstName(firstName)
                     .setLastName(lastName)
                     .setEmail(userEmail)
                     .setGender(gender)
@@ -71,10 +114,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
 
         });
 
-
-
-
-        step("Проверяем", () -> {
+        step("Проверить правильное заполение формы", () -> {
             registrationPage.titleExist();
             registrationPage.checkResults("Student Name", firstName)
                     .checkResults("Student Email", userEmail)
@@ -89,6 +129,11 @@ public class DemoJenkinsAndAllureTest extends TestBase {
     }
 
     @Test
+    @Feature("Issue в репозитории")
+    @Story("Поиск Issue")
+    @Owner("rakeya")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Регистрация необходимых в форме")
     void onlyNeedForRegistrationTest() {
         Faker faker = new Faker();
 
@@ -98,23 +143,42 @@ public class DemoJenkinsAndAllureTest extends TestBase {
         String gender = choiceRandomGender();
         String userNumber = String.valueOf(getRandomLong(1000000000L, 9999999999L));
 
-        registrationPage.openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setGender(gender)
-                .setUserNumber(userNumber)
-                .clickSubmit();
 
-        registrationPage.titleExist();
-        registrationPage.checkResults("Student Name", firstName)
-                .checkResults("Student Email", " ")
-                .checkResults("Address", " ")
-                .checkResults("State and City", " ");
+        step("Открыть страницу", () -> {
+            registrationPage.openPage();
 
 
+        });
+
+
+        step("Заполнить только необходимые поля", () -> {
+            registrationPage.setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setGender(gender)
+                    .setUserNumber(userNumber)
+                    .clickSubmit();
+
+
+        });
+
+        step("Проверить окртытие формы регистации ", () -> {
+            registrationPage.titleExist();
+            registrationPage.checkResults("Student Name", firstName)
+                    .checkResults("Student Email", " ")
+                    .checkResults("Address", " ")
+                    .checkResults("State and City", " ");
+
+
+        });
     }
 
+
     @Test
+    @Feature("Issue в репозитории")
+    @Story("Поиск Issue")
+    @Owner("rakeya")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Пустое поле имени")
     void registrationWithoutFirstName() {
         Faker faker = new Faker();
 
@@ -124,15 +188,26 @@ public class DemoJenkinsAndAllureTest extends TestBase {
         String gender = choiceRandomGender();
         String userNumber = String.valueOf(getRandomLong(1000000000L, 9999999999L));
 
-        registrationPage.openPage()
-                .setLastName(lastName)
-                .setGender(gender)
-                .setUserNumber(userNumber)
-                .clickSubmit();
+        step("Открыть страницу", () -> {
+            registrationPage.openPage();
+
+
+        });
+
+        step("Открыть страницу", () -> {
+            registrationPage.setLastName(lastName)
+                    .setGender(gender)
+                    .setUserNumber(userNumber)
+                    .clickSubmit();
+
+
+        });
+
+        step("Ошибка", () -> {
         registrationPage.titleNotExist();
 
         registrationPage.firstNameEmpty();
+        });
 
     }
 }
-
