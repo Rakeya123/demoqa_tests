@@ -9,6 +9,7 @@ import guru_qa.pageobjects.RegistrationPage;
 import guru_qa.utils.Attach;
 import guru_qa.utils.RandomUtils;
 import io.qameta.allure.*;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -42,18 +43,8 @@ public class DemoJenkinsAndAllureTest extends TestBase {
         ));
 
         Configuration.browserCapabilities = capabilities;
-        SelenideLogger.addListener("AllureSelenide", new LogEventListener() {
-            @Override
-            public void afterEvent(LogEvent logEvent) {
-                System.out.println("After: "+logEvent);
-            }
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
-            @Override
-            public void beforeEvent(LogEvent logEvent) {
-                System.out.println("Before: "+logEvent);
-
-            }
-        });
     }
 
     @AfterEach

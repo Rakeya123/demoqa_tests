@@ -43,6 +43,8 @@ dependencies {
     testImplementation "org.slf4j:slf4j-nop:2.0.9"
     testImplementation "com.github.javafaker:javafaker:1.0.2"
     testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation "io.qameta.allure:allure-selenide:2.27.0"
+
 }
 
 
@@ -63,8 +65,3 @@ task simple_test(type: Test) {
     }
 }
 
-task negative_tests(type: Test) {
-    useJUnitPlatform {
-        includeTags("negative")
-    }
-}
