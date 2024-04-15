@@ -3,6 +3,7 @@ package guru_qa.tests;
 import com.github.javafaker.Faker;
 import guru_qa.pageobjects.RegistrationPage;
 import guru_qa.utils.RandomUtils;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import static guru_qa.utils.RandomUtils.*;
-
+@Tag("simple")
 public class DemoJenkinsAndAllureTest extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
