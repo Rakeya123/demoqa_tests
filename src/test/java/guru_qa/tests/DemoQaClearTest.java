@@ -78,6 +78,7 @@ public class DemoQaClearTest {
     @Tag("User_Service")
     @Test
 
+
     void registrationWithoutFirstName(){
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
