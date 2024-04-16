@@ -1,8 +1,6 @@
 package guru_qa.tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.LogEvent;
-import com.codeborne.selenide.logevents.LogEventListener;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
 import guru_qa.pageobjects.RegistrationPage;
@@ -19,7 +17,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
 import static guru_qa.utils.RandomUtils.*;
 import static io.qameta.allure.Allure.step;
 
