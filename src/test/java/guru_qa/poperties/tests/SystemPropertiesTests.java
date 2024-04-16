@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
+import static java.lang.String.format;
+
 public class SystemPropertiesTests {
 
     @Test
@@ -32,10 +34,24 @@ public class SystemPropertiesTests {
     void systemProperties3Test(){
 
         String browser = System.getProperty("browser", "mozilla");
-        System.out.println(browser);
+        String size = System.getProperty("size", "12133");
+        System.out.println(browser+" "+size);
 
 
         //gradle property_test -Dbrowser=opera
+    }
+
+    @Test
+    @Tag("hello")
+    void systemProperties4Test(){
+
+        String name = System.getProperty("name", "default ");
+        String massage  = format("hello", name);
+        System.out.println(massage);
+
+
+        //gradle property_test -Dbrowser="Alex Egorov"
+        //gradle property_test "-Dbrowser=Alex Egorov"
     }
 }
 
