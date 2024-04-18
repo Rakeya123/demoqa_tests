@@ -6,6 +6,7 @@ import com.github.javafaker.Faker;
 import guru_qa.pageobjects.RegistrationPage;
 import guru_qa.utils.Attach;
 import guru_qa.utils.RandomUtils;
+
 import io.qameta.allure.*;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
@@ -17,8 +18,10 @@ import java.util.Locale;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+
+import static com.codeborne.selenide.logevents.SelenideLogger.step;
 import static guru_qa.utils.RandomUtils.*;
-import static io.qameta.allure.Allure.step;
+
 
 
 @Tag("simple")
