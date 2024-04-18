@@ -6,10 +6,10 @@ import org.junit.jupiter.api.BeforeAll;
 public class TestBase {
     @BeforeAll
     static void beforeAll() {
-     Configuration.browserSize = System.getProperty("browserSize", "1920Х1080");
+        Configuration.browserSize = System.getProperty("browserSize", "1920Х1080");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.browser = System.getProperty("browser", "chrome");
-       Configuration.browserVersion= System.getProperty("browserVersion", "120.0");
+        Configuration.browserVersion = System.getProperty("browserVersion", "120.0");
     }
 }
