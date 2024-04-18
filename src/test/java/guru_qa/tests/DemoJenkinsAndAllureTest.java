@@ -31,7 +31,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
     static void setup() {
 
 
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = "https://user1:1234@"+System.getProperty("remote","selenoid.autotests.cloud")+"/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -85,7 +85,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
 
         });
 
-        step("Заполнить форму регистации ", () -> {
+        step("Заполнить все данные в форме регистации", () -> {
             registrationPage.setFirstName(firstName)
                     .setLastName(lastName)
                     .setEmail(userEmail)
@@ -121,7 +121,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
     @Story("Поиск Issue")
     @Owner("rakeya")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Регистрация необходимых в форме")
+    @DisplayName("Регистрация необходимых данных")
     void onlyNeedForRegistrationTest() {
         Faker faker = new Faker();
 
@@ -139,7 +139,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
         });
 
 
-        step("Заполнить только необходимые поля", () -> {
+        step("Заполнить только необходимые поля для регистации", () -> {
             registrationPage.setFirstName(firstName)
                     .setLastName(lastName)
                     .setGender(gender)
@@ -149,7 +149,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
 
         });
 
-        step("Проверить окртытие формы регистации ", () -> {
+        step("Проверить успешную регистацию", () -> {
             registrationPage.titleExist();
             registrationPage.checkResults("Student Name", firstName)
                     .checkResults("Student Email", " ")
@@ -182,7 +182,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
 
         });
 
-        step("Открыть страницу", () -> {
+        step("Не заполнить поле Имя при регистации", () -> {
             registrationPage.setLastName(lastName)
                     .setGender(gender)
                     .setUserNumber(userNumber)
@@ -191,7 +191,7 @@ public class DemoJenkinsAndAllureTest extends TestBase {
 
         });
 
-        step("Ошибка", () -> {
+        step("Ошибка регистации", () -> {
         registrationPage.titleNotExist();
 
         registrationPage.firstNameEmpty();

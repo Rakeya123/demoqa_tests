@@ -2,7 +2,6 @@ package guru_qa.poperties.tests;
 
 
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static java.lang.String.format;
@@ -29,17 +28,17 @@ public class SystemPropertiesTests {
         System.out.println(browser);
     }
 
-    @Test
-    @Tag("property")
-    void systemProperties3Test(){
-
-        String browser = System.getProperty("browser", "mozilla");
-        String size = System.getProperty("size", "12133");
-        System.out.println(browser+" "+size);
+//    @Test
+//    @Tag("property")
+//    void systemProperties3Test(){
+//
+//        String browser = System.getProperty("browser", "mozilla");
+//        String size = System.getProperty("size", "12133");
+//        System.out.println(browser+" "+size);
 
 
         //gradle property_test -Dbrowser=opera
-    }
+    //}
 
     @Test
     @Tag("hello")
